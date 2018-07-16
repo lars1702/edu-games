@@ -50,7 +50,7 @@ router.post('/login', (req, res, next) => {
         // only the server is able to decrypt it
         // for the client, this is just a token, he knows that
         // he has to send it
-        const token = jwt.encode(payload, config.jwtSecret);
+        const token = jwt.encode(payload, config.jwtSecret); //token stored in local broswer storage!
         res.json({
           token,
           name: user.name,
@@ -64,7 +64,7 @@ router.post('/login', (req, res, next) => {
 });
 
 // Example of secret route
-// If you use Postman, don't forget to add "Authorization" "Bearer <your-JWT>" (without "<" and ">")
+// If you use Postman, don't forget to add "Authorization" "Bearer (your-JWT)"
 router.get('/secret', passport.authenticate("jwt", config.jwtSession), (req, res, next) => {
   res.json({
     answerToLifeTheUniverseAndEverything: 42,

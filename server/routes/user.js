@@ -17,12 +17,16 @@ const storage = cloudinaryStorage({
 const parser = multer({ storage });
 
 
-// Route to get all users
-router.get('/', (req, res, next) => {
-  User.find()
-    .then(users => {
-      res.json(users)
-    })
+//find user and .push stuff from favs there
+
+// Route to get profile
+
+router.get("/profile", passport.authenticate("jwt", config.jwtSession), (req, res, next) => {
+  User.findById(req.user.id)
+  .populate('_favs _games')
+  .then(currentUser => {
+    res.json(currentUser)
+  })
 });
 
 // Route to add a picture on one user with Cloudinary
@@ -38,11 +42,11 @@ router.get('/', (req, res, next) => {
 //   </form>
 router.post('/first-user/pictures', parser.single('picture'), (req, res, next) => {
   console.log('DEBUG req.file', req.file);
-  User.findOneAndUpdate({}, { pictureUrl: req.file.url })
+  User.findOneAndUpdate({}, { imgURL: req.file.url })
     .then(() => {
       res.json({
         success: true,
-        pictureUrl: req.file.url
+        imgURL: req.file.url
       })
     })
 });

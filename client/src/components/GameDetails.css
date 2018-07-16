@@ -1,0 +1,12 @@
+.thumb {
+ width: 50px;
+ border: grey solid 1px
+}
+
+.heart {
+    width: 40px
+}
+
+.GameDetailImage {
+    height: 100%
+}

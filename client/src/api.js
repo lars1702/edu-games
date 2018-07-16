@@ -5,33 +5,61 @@ const service = axios.create({
 });
 
 const errHandler = err => {
-  console.error(err);
+  console.error("API.js - general error with API/axios:",err);
   throw err;
 };
 
 export default {
   service: service,
   
-  getCountries() {
+  getGames() { //games
+    console.log("ENTERING GETGAMES")
     return service
-      .get('/countries')
+      .get('/games')
+      .then(res => {
+        console.log("GETGAMES AFTER ROUTE.")    
+        return res.data})
+      .catch(errHandler);
+  },
+  getProfile() {
+    console.log("ENTERING GETPROFILE")    
+    return service
+      .get('/user/profile')
+      .then(res => {
+        console.log("LEAVING GETPROFILE")    
+        return res.data})
+      .catch(errHandler); 
+  },
+
+  getGame(gameId) {
+    return service
+      .get('/games/'+gameId)
+      .then(res => res.data) //returns a single game as an object 
+      .catch(errHandler);
+  },
+
+  editGame(gameId, data) { //in REACT we will send arguments here. api.editGame(12345, {name: "Tetris", description: "some description"})
+    return service
+      .put('/games/'+gameId, data)
       .then(res => res.data)
       .catch(errHandler);
   },
 
-  postCountries(data) {
+
+  deleteGame(gameId) { //in REACT we will send arguments here. api.editGame(12345, {name: "Tetris", description: "some description"})
+  return service
+    .delete('/games/'+gameId)
+    .then(res => res.data)
+    .catch(errHandler);
+},
+
+  postGames(data) {
     return service
-      .post('/countries', data)
+      .post('/games/', data)
       .then(res => res.data)
       .catch(errHandler);
   },
   
-  getSecret() {
-    return service
-      .get('/secret')
-      .then(res => res.data)
-      .catch(errHandler);
-  },
   
   signup(userInfo) {
     return service
@@ -80,7 +108,7 @@ export default {
     const formData = new FormData();
     formData.append("picture", file)
     return service
-      .post('/users/first-user/pictures', formData, {
+      .post('/user/first-user/pictures', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

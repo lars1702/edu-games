@@ -97,7 +97,6 @@ So now you can go to
 
 - `router.post('/signup')`: Route to create a new user
 - `router.post('/login')`: Route to send the user JWT 
-- `router.get('/secret')`: Route where the user need to be authenticated
 
 
 ### `server/routes/users.js`
@@ -108,11 +107,11 @@ So now you can go to
 <!-- TODO: give instructions for Cloudinary -->
 <!-- TODO: give instructions for route guards -->
 
-### `server/routes/countries.js`
+### `server/routes/games.js`
 
-- `router.get('/')`: Route to get all countries
-- `router.get('/static-sample')`: Route to get a static sample of countries
-- `router.post('/')`: Route to add a country
+- `router.get('/')`: Route to get all games
+- `router.get('/static-sample')`: Route to get a static sample of games
+- `router.post('/')`: Route to add a game
 
 
 

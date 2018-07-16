@@ -11,9 +11,10 @@ const { Strategy, ExtractJwt } = require("passport-jwt");
 
 const config = require("./configs/index");
 var User = require('./models/user');
+
 var authRoutes = require('./routes/auth');
-var countriesRoutes = require('./routes/countries');
-var usersRoutes = require('./routes/users');
+var gamesRoutes = require('./routes/games');
+var userRoutes = require('./routes/user');
 
 require('./configs/database');
 require('./configs/cloudinary');
@@ -29,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set the public folder to "~/client/build/"
 // Example: http://localhost:3030/favicon.ico => Display "~/client/build/favicon.ico"
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../client/build/index.html')));
 
 
 app.use(passport.initialize());
@@ -62,8 +63,8 @@ passport.use(strategy);
 
 // List all your API routes
 app.use('/api', authRoutes);
-app.use('/api/countries', countriesRoutes);
-app.use('/api/users', usersRoutes);
+app.use('/api/games', gamesRoutes);
+app.use('/api/user', userRoutes);
 
 
 // For any routes that starts with "/api", catch 404 and forward to error handler

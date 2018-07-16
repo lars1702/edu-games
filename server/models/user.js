@@ -7,7 +7,9 @@ const userSchema = new Schema({
   // hashed: String, // Defined with passportLocalMongoose
   // salt: String, // Defined with passportLocalMongoose
   name: {type:String, required: [true, "A name is required"]},
-  pictureUrl: String,
+  imgUrl: String,
+  _favs: [{type: Schema.Types.ObjectId, ref: "Game"}],
+  _games: [{type: Schema.Types.ObjectId, ref: "Game"}],
 });
 
 // Add "email" (instead of "username"), "hash" and "salt" field to store the email (as username), the hashed password and the salt value
