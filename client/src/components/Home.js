@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../api';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { Route, Link, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 class Home extends Component {

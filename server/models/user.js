@@ -8,7 +8,11 @@ const userSchema = new Schema({
   // salt: String, // Defined with passportLocalMongoose
   name: {type:String, required: [true, "A name is required"]},
   imgUrl: String,
-  _favs: [{type: Schema.Types.ObjectId, ref: "Game"}],
+  
+  _favs: [{
+            title: String,
+            games: [{type: Schema.Types.ObjectId, ref: "Game"}]
+          }],
   _games: [{type: Schema.Types.ObjectId, ref: "Game"}],
 });
 

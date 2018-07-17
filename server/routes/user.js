@@ -1,22 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Game = require('../models/game');
 const passport = require('passport');
 const config = require('../configs/index');
-
-const cloudinary = require('cloudinary');
-const cloudinaryStorage = require('multer-storage-cloudinary');
-const multer = require('multer');
-
-const storage = cloudinaryStorage({
-  cloudinary,
-  folder: 'my-images',
-  allowedFormats: ['jpg', 'png', 'gif'],
-});
-
-const parser = multer({ storage });
-
-
+const uploadCloud = require('../configs/cloudinary');
 //find user and .push stuff from favs there
 
 // Route to get profile
@@ -40,15 +28,24 @@ router.get("/profile", passport.authenticate("jwt", config.jwtSession), (req, re
 //     <input type="file" name="picture" />
 //     <input type="submit" value="Upload" />
 //   </form>
-router.post('/first-user/pictures', parser.single('picture'), (req, res, next) => {
-  console.log('DEBUG req.file', req.file);
-  User.findOneAndUpdate({}, { imgURL: req.file.url })
-    .then(() => {
+router.post('/add-game', uploadCloud.single('picture'), (req, res, next) => {
+  console.log('DEBUG req.file', req.file, req.body);
+  let newGame = {
+    name: req.body.name,
+    description: req.body.description,
+    keywords: req.body.keywords,
+    gameURL: req.body.gameURL,
+    imgURL: req.file.url,
+  }
+  Game.create(newGame)
+    .then((newGame) => {
       res.json({
         success: true,
-        imgURL: req.file.url
+        newGame
       })
     })
 });
+
+// router.post("/add-game", uploadCloud.single("picture"))
 
 module.exports = router;

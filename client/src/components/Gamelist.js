@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../api";
 import "./Gamelist.css";
-import { Route, Link, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Searchbar from "./Searchbar";
 import Shiitake from "shiitake";
 import sThumbsUp from "../images/thumbs-down-solid.svg";
@@ -75,7 +75,7 @@ class Gamelist extends Component {
                           <img
                             className="rounded list-image img-fluid"
                             src={game.imgURL}
-                            alt="game-image"
+                            alt={game.name}
                           />
                         </div>
                         <div className="col-6 px-1 py-0 my-0 text-n-img ">

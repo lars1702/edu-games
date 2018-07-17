@@ -1,5 +1,7 @@
 'use strict';
 
+require("dotenv").config();
+
 const mongoose = require('mongoose');
 const dbName = 'edu-fun';
 const mongoUri = process.env.MONGODB_URI || `mongodb://localhost/${dbName}`;

@@ -53,9 +53,39 @@ export default {
     .catch(errHandler);
 },
 
+  // addPicture(file) {
+  //   const formData = new FormData();
+  //   formData.append("picture", file)
+  //   console.log('DEBUG formData', formData.get("picture"));
+  //   return service
+      // .post('/users/first-user/pictures', formData, {
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //   },
+      // })
+  //     .then(res => res.data)
+  //     .catch(errHandler);
+  // },
+
+
+  //the ROUTE just above. You have to add the .post('/users/first-user/pictures', formData,
+  // the formData. How to post both the forData and your data????????
   postGames(data) {
+    console.log("POSTGAMES", data)
+    const formData = new FormData();
+    formData.append("picture", data.file)
+    formData.append("name", data.name)
+    formData.append("description", data.description)
+    formData.append("keywords", data.keywords)
+
+
+    console.log('DEBUG formData', formData);
     return service
-      .post('/games/', data)
+      .post('/user/add-game', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       .then(res => res.data)
       .catch(errHandler);
   },

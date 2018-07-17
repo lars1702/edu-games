@@ -9,7 +9,7 @@ const gameSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: [true, "Give a short description of the game"]
+    required: [true, "Description of the game is required"]
   },
   _reviews: [{type: Schema.Types.ObjectId, ref: "Game"}],
   keywords: [String],
