@@ -13,6 +13,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    console.log("COMP")
     api.getProfile()
     .then(user =>{
         this.setState({
@@ -20,7 +21,8 @@ class Profile extends Component {
         })
     })
   }
-  render() {                
+  render() {
+    console.log("RENDER")
     return (
       <div className="Home">
         <h2>{this.state.user.email}</h2>

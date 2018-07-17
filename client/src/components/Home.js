@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import api from '../api';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { Route, Link, Switch } from "react-router-dom";
+
 
 class Home extends Component {
   constructor(props) {
@@ -90,10 +92,11 @@ class Home extends Component {
               </div>
           </div>
         </div>
-        <a href="/gamelist"></a>
-        <h2 className="btn btn-lg btn-success text-dark font-weight-bold">
-          See all games
-        </h2>
+        <Link to="/games">
+          <h2 className="btn btn-lg btn-success text-dark font-weight-bold">
+            See all games
+          </h2>
+        </Link >
       </div>
     );
   }

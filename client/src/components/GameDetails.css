@@ -8,5 +8,10 @@
 }
 
 .GameDetailImage {
-    height: 100%
+    height: 100%;
+    border-color: red;
+}
+
+.game-detail {
+    background-color: rgb(228, 228, 228)
 }

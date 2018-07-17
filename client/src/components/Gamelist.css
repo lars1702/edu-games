@@ -1,0 +1,47 @@
+.list-image {
+    text-align: left;
+    margin-right: 100%
+}
+
+
+.text-n-img {
+    height: 170px;
+}
+
+.game-card:hover div {
+    background-color: rgb(226, 226, 226);
+    text-decoration:none;
+}
+
+.kw-list {
+    height: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+}
+.btn-hover:hover {
+    background-color: rgb(155, 155, 155)
+}
+
+.ell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
