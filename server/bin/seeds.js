@@ -5,14 +5,12 @@ const Review = require('../models/review');
 
 const Schema   = mongoose.Schema; //not needed?
 
+require('dotenv').config()
+
 mongoose.Promise = Promise;
 
-const dbName = 'edu-fun';
-mongoose.connect(`mongodb://localhost/${dbName}`); //connecting to the database
-
-review_user = []
-review_game = []
-user_favs = []
+// const dbName = 'mongodb://localhost/$edu-fun';
+mongoose.connect(process.env.MONGODB_URI);
 
 const games = [
     {
@@ -92,12 +90,11 @@ Game.deleteMany()
 .then(() => User.deleteMany())
 .then(() => Review.deleteMany())
 .then(() => Game.create(games))
-// .then((GameDocDB) => console.log(GameDocDB))
 .then(() => console.log(`\n Created a collection of ${games.length} games \n`))
 .then(() =>  User.register(user, "123"))
-.then((UserDocDB) => console.log(`Created a collection with 1 user \n`))
+.then(() => console.log(`Created a collection with 1 user \n`))
 .then(() => Review.create(reviews))
-.then((ReviewDocDB) => console.log(`Created a collection of ${reviews.length} reviews\n`))
+.then(() => console.log(`Created a collection of ${reviews.length} reviews\n`))
 .then(() => mongoose.connection.close())
 .catch(err => console.log("ERROR ERROR ERROR: \n \n", err));
 
