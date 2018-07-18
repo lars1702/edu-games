@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set the public folder to "~/client/build/"
 // Example: http://localhost:3030/favicon.ico => Display "~/client/build/favicon.ico"
-app.use(express.static(path.join(__dirname, '../client/build/index.html')));
+app.use(express.static(path.join(__dirname, '../client/build/')));
 
 
 app.use(passport.initialize());

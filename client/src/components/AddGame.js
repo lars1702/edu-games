@@ -143,7 +143,7 @@ class AddGame extends Component {
         </FormGroup>
         <FormGroup>
           <Label for="cloudUpload">Picture upload</Label>
-          <Input onChange={(e)=>this.handleImgChange(e)} type="file" name="cloudUpload" id="cloudUpload" /> {/* ONLY THIS LINE IS REPLACED */}
+          <Input onChange={(e)=>this.handleImgChange(e)} type="file" name="cloudUpload" id="cloudUpload" />
           <FormText color="muted">
             Upload a picture with the new game. This will be the image shown on the front of the game.
             The image will be cropped to 600x400px. It's suggested you pick one of equal or bigger size to avoid pixelization.
