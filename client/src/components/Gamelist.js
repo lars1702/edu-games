@@ -65,8 +65,8 @@ class Gamelist extends Component {
               return false;
             })
             .map((game, i) => (
-              <div className="col-xl-4 game-card col-lg-6 m-2 p-0">
-                <div className="col-md pb-2 border m-0" key={i}>
+              <div className="col-xl-4 game-card col-lg-6 m-0 p-1">
+                <div className="col-md m-3 pb-2 border" key={i}>
               <Link className=" mx-0" to={"/games/" + game._id}>
                 <h3 className="font-weight-bold my-1">{game.name}</h3>
                   <div className="card border-0 rounded-0 game-card">

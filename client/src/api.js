@@ -26,7 +26,7 @@ export default {
     return service
       .get('/user/profile')
       .then(res => {
-        console.log("LEAVING GETPROFILE")    
+        console.log("LEAVING GETPROFILE", res.data)    
         return res.data})
       .catch(errHandler); 
   },

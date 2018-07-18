@@ -57,13 +57,18 @@ class AddGame extends Component {
   }
   
   handleSelectChange = (selectedOption) => {
-    console.log(selectedOption[selectedOption.length-1].value)
-    
-    this.setState({ 
-      selectedOption,
-      keywords: [...this.state.keywords, selectedOption[selectedOption.length-1].value] 
-    });
-    console.log(this.state.keywords)
+    if (selectedOption.length === 0) {
+      this.setState({ 
+        selectedOption,
+        keywords: [] 
+      });
+    }
+    else {
+      this.setState({ 
+        selectedOption,
+        keywords: [...this.state.keywords, selectedOption[selectedOption.length-1].value] 
+      });
+    }    
   }
   
   
@@ -100,13 +105,16 @@ class AddGame extends Component {
 
   render() {
     let games = this.state.games
-    var dropDownKeyWords = []
+    let dropDownKeyWords = []
+    let temp = []
     games.forEach ((game)=> {
       game.keywords.forEach((kw, i) => {
         let kwObject = { value: kw, label: kw }
-        if (!dropDownKeyWords.includes(kw)) {dropDownKeyWords.push(kwObject)}
+        if (!temp.includes(kw)) dropDownKeyWords.push(kwObject)
+        temp.push(kw)
       })
     })
+
     const { selectedOption } = this.state;    //makes a variable of the current option/state
     return (
       <div className="AddGame">
@@ -138,7 +146,7 @@ class AddGame extends Component {
           <Input onChange={(e)=>this.handleImgChange(e)} type="file" name="cloudUpload" id="cloudUpload" /> {/* ONLY THIS LINE IS REPLACED */}
           <FormText color="muted">
             Upload a picture with the new game. This will be the image shown on the front of the game.
-            The image will be cropped to 600x400px. It's suggested you pick one of equal or bigger size to avoid pixelisation.
+            The image will be cropped to 600x400px. It's suggested you pick one of equal or bigger size to avoid pixelization.
           </FormText>
         </FormGroup>
         <Button onClick={(e) => this.handleClick(e)}>Upload game</Button>

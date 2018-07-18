@@ -29,7 +29,8 @@ class App extends Component {
         <header className="App-header p-0">
           <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link> 
           <Link to="/games">Games</Link> 
-          <Link to="/profile">Profile</Link> 
+          {/* <Link to="/profile">Profile</Link>  */}
+          {api.isLoggedIn() && <Link to="/profile">Profile</Link> }
           {!api.isLoggedIn() && <Link to="/signup">Signup</Link> }
           {!api.isLoggedIn() && <Link to="/login">Login</Link> }
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link> }
