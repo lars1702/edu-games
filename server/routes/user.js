@@ -10,9 +10,18 @@ const uploadCloud = require('../configs/cloudinary');
 // Route to get profile
 
 router.get("/profile", passport.authenticate("jwt", config.jwtSession), (req, res, next) => {
+  console.log("ENTERING PROFILE ROUTE")
   User.findById(req.user.id)
-  .populate('_favs _games')
+  .populate('_games')
+  .populate({
+        path: '_favs.games',
+        model: 'Game'
+      }
+    
+  )
+
   .then(currentUser => {
+    console.log("LEAVING PROFILE ROUTE", currentUser)
     res.json(currentUser)
   })
 });
@@ -29,11 +38,12 @@ router.get("/profile", passport.authenticate("jwt", config.jwtSession), (req, re
 //     <input type="submit" value="Upload" />
 //   </form>
 router.post('/add-game', uploadCloud.single('picture'), (req, res, next) => {
-  console.log('DEBUG req.file', req.file, req.body);
+  console.log('DEBUG req.file', req.body);
+  
   let newGame = {
     name: req.body.name,
     description: req.body.description,
-    keywords: req.body.keywords,
+    keywords: req.body.keywords.split(","),
     gameURL: req.body.gameURL,
     imgURL: req.file.url,
   }
