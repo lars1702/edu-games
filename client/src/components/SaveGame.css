@@ -1,0 +1,21 @@
+/* .Select-menu-outer {
+    background-color: #ffc107 !important;
+} */
+.Select-control {
+    background-color: #ffc107 !important;
+}
+.Select {
+    background-color: #ffc107 !important;
+    border-radius: .25rem!important;
+}
+
+.game-lbl {
+    background-color: white;
+    padding-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.Select-placeholder {
+    color: grey !important;
+    content: "Hello" !important;
+}

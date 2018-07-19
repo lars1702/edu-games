@@ -4,9 +4,9 @@ import "./Gamelist.css";
 import { Link } from "react-router-dom";
 import Searchbar from "./Searchbar";
 import Shiitake from "shiitake";
-import sThumbsUp from "../images/thumbs-down-solid.svg";
-import sThumbsDown from "../images/thumbs-up-solid.svg";
-import heart from "../images/heart-solid.svg";
+import SaveGame from "./SaveGame"
+import Select, { Creatable } from 'react-select';
+
 
 
 class Gamelist extends Component {
@@ -66,19 +66,19 @@ class Gamelist extends Component {
             })
             .map((game, i) => (
               <div className="col-xl-4 game-card col-lg-6 m-0 p-1">
-                <div className="col-md m-3 pb-2 border" key={i}>
+                <div className="g-l-hover col-md m-3 pb-2 border" key={i}>
               <Link className=" mx-0" to={"/games/" + game._id}>
                 <h3 className="font-weight-bold my-1">{game.name}</h3>
-                  <div className="card border-0 rounded-0 game-card">
-                      <div className="row mx-0 mb-2 p-0">
-                        <div className="col-6 p-0">
+                  <div className="g-l-hover card border-0 rounded-0 game-card">
+                      <div className="g-l-hover row mx-0 mb-2 p-0">
+                        <div className="g-l-hover col-6 p-0">
                           <img
                             className="rounded list-image img-fluid"
                             src={game.imgURL}
                             alt={game.name}
                           />
                         </div>
-                        <div className="col-6 px-1 py-0 my-0 text-n-img ">
+                        <div className="g-l-hover col-6 px-1 py-0 my-0 text-n-img ">
                           <Shiitake
                             lines={6}
                             throttleRate={200}
@@ -106,14 +106,8 @@ class Gamelist extends Component {
                   </div>
                   <hr className="mb-2"/>
                   </Link>
-                  <div className="row mx-0 justify-content-around">
-                      <div className="row my-auto mx-0">
-                        <button onClick="" className="btn btn-light btn-hover btn-sm m-1 mt-0"><img height="20" className="" src={sThumbsDown} alt="thumb" /></button>
-                        <button onClick="" className="btn btn-light btn-hover btn-sm m-1 mt-0"><img height="20" className="" src={sThumbsUp} alt="thumb" /></button>
-                      </div>
-                      <div className="row my-auto">
-                        <button onClick="" className="btn btn-light btn-hover btn-sm m-0 p-0"><img className="heart" height="25" src={heart} alt=""/></button>
-                      </div>
+                  <div className="w-50 mx-auto">
+                          <SaveGame className=""/>
                   </div>
                 </div>
               </div>

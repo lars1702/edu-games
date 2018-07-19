@@ -36,7 +36,7 @@ class App extends Component {
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link> }
         </header>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Gamelist} />
           <Route path="/profile" component={Profile} />
           <Route exact path="/games" component={Gamelist} />
           <Route path="/games/:id" component={GameDetails} />

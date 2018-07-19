@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import api from "../api";
 // import Gamelist from "./Gamelist";
 import "./GameDetails.css";
-import sThumbsUp from "../images/thumbs-down-regular.svg";
-import sThumbsDown from "../images/thumbs-up-solid.svg";
-import rThumbsUp from "../images/thumbs-up-regular.svg";
-import rThumbsDown from "../images/thumbs-down-solid.svg";
 import heart from "../images/heart-solid.svg";
+import SaveGame from "./SaveGame"
+
 
 class Gamedetails extends Component {
   constructor(props) {
@@ -68,15 +66,10 @@ class Gamedetails extends Component {
             </div>
             <div className="col">
               <div className="col">
-                <p>Add to favorites</p>
+                <div className="w-75 mx-auto">
                 <img className="heart" src={heart} alt=""/>
-              </div>
-              <div className="col">
-                <p>Score: this.state.score?</p>
-                <img className="thumb" src={sThumbsUp} alt="thumb" />
-                <img className="thumb" src={rThumbsUp} alt="thumb" />
-                <img className="thumb" src={sThumbsDown} alt="thumb" />
-                <img className="thumb" src={rThumbsDown} alt="thumb" />
+                          <SaveGame className=""/>
+                  </div>
               </div>
             </div>
           </div>

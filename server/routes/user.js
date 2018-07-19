@@ -26,17 +26,7 @@ router.get("/profile", passport.authenticate("jwt", config.jwtSession), (req, re
   })
 });
 
-// Route to add a picture on one user with Cloudinary
-// To perform the request throw Postman, you need
-// - Endpoint: POST http://localhost:3030/api/first-user/users/pictures
-// - Select: Body > form-data
-// - Put as key: picture (and select "File")
-// - Upload your file
-// To perform the request in HTML:
-//   <form method="post" enctype="multipart/form-data" action="http://localhost:3030/api/users/first-user/pictures">
-//     <input type="file" name="picture" />
-//     <input type="submit" value="Upload" />
-//   </form>
+
 router.post('/add-game', uploadCloud.single('picture'), (req, res, next) => {
   console.log('DEBUG req.file', req.body);
   
@@ -55,6 +45,22 @@ router.post('/add-game', uploadCloud.single('picture'), (req, res, next) => {
       })
     })
 });
+
+router.post('/add-to-fav', (req, res, next) => {
+  console.log('DEBUG req FAV', req.body);
+
+  let newFav = {
+    user: req.body.user,
+    newFavGame: req.body.newFavGame
+  }
+
+  // {
+  //   title: String,
+  //   games: [{type: Schema.Types.ObjectId, ref: "Game"}]
+  // }
+  
+})
+
 
 // router.post("/add-game", uploadCloud.single("picture"))
 

@@ -13,20 +13,20 @@ export default {
   service: service,
   
   getGames() { //games
-    console.log("ENTERING GETGAMES")
+    // console.log("ENTERING GETGAMES")
     return service
       .get('/games')
       .then(res => {
-        console.log("GETGAMES AFTER ROUTE.")    
+        // console.log("GETGAMES AFTER ROUTE.")    
         return res.data})
       .catch(errHandler);
   },
   getProfile() {
-    console.log("ENTERING GETPROFILE")    
+    // console.log("ENTERING GETPROFILE")    
     return service
       .get('/user/profile')
       .then(res => {
-        console.log("LEAVING GETPROFILE", res.data)    
+        // console.log("LEAVING GETPROFILE", res.data)    
         return res.data})
       .catch(errHandler); 
   },
@@ -53,25 +53,11 @@ export default {
     .catch(errHandler);
 },
 
-  // addPicture(file) {
-  //   const formData = new FormData();
-  //   formData.append("picture", file)
-  //   console.log('DEBUG formData', formData.get("picture"));
-  //   return service
-      // .post('/users/first-user/pictures', formData, {
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data',
-      //   },
-      // })
-  //     .then(res => res.data)
-  //     .catch(errHandler);
-  // },
-
 
   //the ROUTE just above. You have to add the .post('/users/first-user/pictures', formData,
   // the formData. How to post both the forData and your data????????
   postGames(data) {
-    console.log("POSTGAMES", data)
+    // console.log("POSTGAMES", data)
     const formData = new FormData();
     formData.append("picture", data.file)
     formData.append("name", data.name)
@@ -79,7 +65,7 @@ export default {
     formData.append("keywords", data.keywords)
 
 
-    console.log('DEBUG formData', formData);
+    // console.log('DEBUG formData', formData);
     return service
       .post('/user/add-game', formData, {
         headers: {
@@ -87,6 +73,15 @@ export default {
         },
       })
       .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  postNewFavorite(NewFavData) {
+    return service
+      .post('/user/add-to-fav', NewFavData)
+      .then(res => {
+        // console.log("LEAVING postFavortire", res.data)    
+        return res.data})
       .catch(errHandler);
   },
   

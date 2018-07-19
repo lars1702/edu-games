@@ -3,12 +3,11 @@
     margin-right: 100%
 }
 
-
 .text-n-img {
     height: 170px;
 }
 
-.game-card:hover div {
+.game-card:hover .g-l-hover {
     background-color: rgb(226, 226, 226);
     text-decoration:none;
 }
