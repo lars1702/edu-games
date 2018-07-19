@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Searchbar from "./Searchbar";
 import Shiitake from "shiitake";
 import SaveGame from "./SaveGame"
-import Select, { Creatable } from 'react-select';
 
 
 
@@ -47,6 +46,7 @@ class Gamelist extends Component {
       <div className="Gamelist container">
         <h2>Games</h2>
         <Searchbar
+          className="rounded"
           onSearch={this.handleSearch.bind(this)}
           searchTerm={this.state.searchTerm}
         />
@@ -72,20 +72,20 @@ class Gamelist extends Component {
               return false;
             })
             .map((game, i) => (
-              <div className="col-xl-4 game-card col-lg-6 m-0 p-1">
-                <div className="g-l-hover col-md m-3 pb-2 border" key={i}>
+              <div className="col-xl-4 game-card col-lg-6 m-0 p-sm-0 p-md-1">
+                <div className="g-l-card col-md my-3 pb-2 border" key={i}>
               <Link className=" mx-0" to={"/games/" + game._id}>
                 <h3 className="font-weight-bold my-1">{game.name}</h3>
-                  <div className="g-l-hover card border-0 rounded-0 game-card">
-                      <div className="g-l-hover row mx-0 mb-2 p-0">
-                        <div className="g-l-hover col-6 p-0">
+                  <div className="g-l-card card border-0 rounded-0 game-card">
+                      <div className="g-l-card row mx-0 mb-2 p-0">
+                        <div className="g-l-card col-6 p-0">
                           <img
                             className="rounded list-image img-fluid"
                             src={game.imgURL}
                             alt={game.name}
                           />
                         </div>
-                        <div className="g-l-hover col-6 px-1 py-0 my-0 text-n-img ">
+                        <div className="g-l-card col-6 px-1 py-0 my-0 text-n-img ">
                           <Shiitake
                             lines={6}
                             throttleRate={200}
@@ -102,7 +102,7 @@ class Gamelist extends Component {
                       <div className="row mx-2">
                         {game.keywords.map((keyword, i) => (
                           <p
-                            className="ell list-unstyled bg-secondary text-light m-0 px-1 border rounded"
+                            className="ell list-unstyled bg-secondary text-light px-1 border-0 border rounded"
                             key={i}
                           >
                             {keyword}

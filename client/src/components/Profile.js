@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import api from "../api";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import AddGame from "./AddGame";
-import UserInfo from "./UserInfo";
+import NewList from "./NewList";
 import { Container, Row, Col } from 'reactstrap';
 
 
@@ -27,7 +27,7 @@ class Profile extends Component {
     console.log("RENDER");
     return (
       <Row className="Profile ">
-          <Col className="mr-auto px-5 border" md="6" lg="5"><UserInfo/></Col>
+          <Col className="mr-auto px-5 border" md="6" lg="5"><NewList/></Col>
           <Col className="ml-auto px-5 border" md="6" lg="5"><AddGame /></Col>
       </Row>
     );

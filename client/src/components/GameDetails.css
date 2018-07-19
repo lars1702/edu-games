@@ -7,11 +7,7 @@
     width: 40px
 }
 
-.GameDetailImage {
-    height: 100%;
-    border-color: red;
-}
 
 .game-detail {
-    background-color: rgb(228, 228, 228)
+    background-color: #FFD940
 }

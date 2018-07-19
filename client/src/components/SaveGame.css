@@ -1,21 +1,38 @@
 /* .Select-menu-outer {
     background-color: #ffc107 !important;
 } */
-.Select-control {
-    background-color: #ffc107 !important;
+.g-l-card .Select-control {
+    background-color: lightyellow !important;
+    color: black;
+    border: 0;
+    margin-top: 18px;
 }
-.Select {
-    background-color: #ffc107 !important;
+/* .g-l-card .Select {
+    background-color: lightyellow !important;
     border-radius: .25rem!important;
+    border: 0
+} */
+
+.g-l-card .Select-control:hover {
+    background-color: lightblue !important;
+    border: 0
 }
 
-.game-lbl {
+.g-l-card .game-lbl {
     background-color: white;
     padding-bottom: 0px;
     padding-bottom: 0px;
 }
 
-.Select-placeholder {
-    color: grey !important;
-    content: "Hello" !important;
+.g-d-card .Select-control:hover {
+    background-color: lightblue !important;
+    border: 0
 }
+
+.g-d-card .game-lbl {
+    background-color: white;
+    padding-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+

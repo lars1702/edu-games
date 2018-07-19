@@ -115,16 +115,16 @@ class AddGame extends Component {
 
     const { selectedOption } = this.state;    //makes a variable of the current option/state
     return (
-      <div className="AddGame">
+      <div className="AddGame container col-sm-9 col-lg-6 col-xl-4">
         <h2>Add game</h2>
-
-        <Form>
+        <p className="py-3 card bg-warning">Here you can add a new game to the website! To host a new game we will need some information about the game. Fill in the form below, and we'll do the rest.</p>
+        <Form className=" border rounded p-3">
         <FormGroup>
-          <Label for="gameName">Game name</Label>
+          <Label className="mx-1 row" for="gameName">Name</Label>
           <Input onChange={(e)=>this.handleNameChange(e)} type="text" name="gameName" id="gameName" placeholder="Name of the game" />
         </FormGroup>
         <FormGroup>
-          <Label for="keywordSelectMulti">Select Multiple Keywords</Label>
+          <Label className="mx-1 row" for="keywordSelectMulti">Keywords</Label>
           <Select
             name="multi-keyword-selector"
             id="keywordSelectMulti"
@@ -136,18 +136,20 @@ class AddGame extends Component {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="gameDescription">Game description</Label>
-          <Input onChange={(e)=>this.handleDescriptionChange(e)} placeholder="Describe your game: how is it played, how is it educational" type="textarea" name="gameDescription" id="gameDescription" />
+          <Label className="mx-1 row" for="gameDescription">Game description</Label>
+          <Input onChange={(e)=>this.handleDescriptionChange(e)} placeholder="How is the game played & how is it educational?" type="textarea" name="gameDescription" id="gameDescription" />
         </FormGroup>
-        <FormGroup>
-          <Label for="cloudUpload">Picture upload</Label>
+        <hr/>
+        <FormGroup className=" w-75 rounded">
+          <Label for="cloudUpload" className="mx-1 row text-align-left mr-auto">Picture upload</Label>
           <Input onChange={(e)=>this.handleImgChange(e)} type="file" name="cloudUpload" id="cloudUpload" /> {/* ONLY THIS LINE IS REPLACED */}
           <FormText color="muted">
             Upload a picture with the new game. This will be the image shown on the front of the game.
             The image will be cropped to 600x400px. It's suggested you pick one of equal or bigger size to avoid pixelization.
           </FormText>
         </FormGroup>
-        <Button onClick={(e) => this.handleClick(e)}>Upload game</Button>
+        <hr/>
+        <Button success size="lg" onClick={(e) => this.handleClick(e)}>Upload game!</Button>
       </Form>
 
         <div style={{

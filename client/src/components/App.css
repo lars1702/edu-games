@@ -6,6 +6,25 @@
   background-color: #C9F5FF;
 }
 
+.grey-bg {
+  background-color: #DCDCDC
+}
+
+.blue-bg {
+  background-color: #0031E1
+}
+.yellow-bg {
+  background-color: #FFD940
+}
+.green-bg {
+  background-color: #29C400
+}
+
+
+.vh-100 {
+  min-height: 100vh
+}
+
 .App-logo {
   border-radius: 15px;
   padding: 8px;

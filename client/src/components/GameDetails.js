@@ -10,9 +10,9 @@ class Gamedetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      game: {
-        keywords: ["hello", "world"]
-      }
+      games: [],
+      game: null,
+      favs: []
     };
   }
   componentDidMount() {
@@ -23,11 +23,17 @@ class Gamedetails extends Component {
         this.setState({ game });
       })
       .catch(err => console.log("could not set state for GameDetail: ", err));
+
+      api.getMyFavs().then(favs => {
+        this.setState({
+          favs
+        })
+      })
   }
   render() {
     console.log("Render GameDetail", this.state.game);
     return (
-      <div className="Gamedetail container">
+      this.state.game && <div className="Gamedetail container col-xl-9">
         {" "}
         {/* can this be an article-tag, and the four inside section-tags? */}
         <h2>{this.state.game.name}</h2>
@@ -51,12 +57,12 @@ class Gamedetails extends Component {
           <hr className="w-75 mx-auto my-4"/>
           
           <div className="row mx-2">
-            <div className="col">
+            <div className="col-md-6">
               <h4>Keywords</h4>
               <ul className="row">
                 {this.state.game.keywords.map((gameKeyword, i) => (
                   <li
-                    className="list-unstyled bg-secondary text-light mx-1 px-1 border rounded"
+                    className="list-unstyled bg-secondary text-light mx-1 px-1 ell rounded"
                     key={i}
                   >
                     {gameKeyword}
@@ -64,11 +70,13 @@ class Gamedetails extends Component {
                 ))}
               </ul>
             </div>
-            <div className="col">
+            <div className="col-md-6">
               <div className="col">
                 <div className="w-75 mx-auto">
-                <img className="heart" src={heart} alt=""/>
-                          <SaveGame className=""/>
+                <h5>
+                  Add game
+                </h5>
+                    <SaveGame gameId={this.state.game._id} className="" favs={this.state.favs}/>
                   </div>
               </div>
             </div>

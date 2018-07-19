@@ -9,13 +9,17 @@
 
 
 
-.game-card:hover .g-l-hover {
-    background-color: rgb(226, 226, 226);
+.game-card:hover .g-l-card {
+    background-color: rgb(226, 226, 226) !important;
     text-decoration:none;
 }
 
+.g-l-card {
+    background-color: #FFD940
+}
+
 .kw-list {
-    height: 70px;
+    height: 79.2px;
     overflow: hidden;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -26,9 +30,7 @@
 }
 
 .ell {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    margin: 1px !important;
 }
 
 a:link {
