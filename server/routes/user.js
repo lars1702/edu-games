@@ -46,13 +46,17 @@ router.post('/add-game', uploadCloud.single('picture'), (req, res, next) => {
     })
 });
 
-router.post('/add-to-fav', (req, res, next) => {
-  console.log('DEBUG req FAV', req.body);
+router.post('/add-to-fav',  passport.authenticate("jwt", config.jwtSession),(req, res, next) => {
+  let userId = req.user.id;
+  let ListName = req.body.newFavGame.value;
+  let gameId = req.body.gameId;
+  
+  console.log("\nUSER:", userId,"\nLIST:",ListName, "\nGAME:",gameId)
 
-  let newFav = {
-    user: req.body.user,
-    newFavGame: req.body.newFavGame
-  }
+  User.findById(userId)
+  .then((user)=>{
+    console.log(user._favs)
+  })
 
   // {
   //   title: String,

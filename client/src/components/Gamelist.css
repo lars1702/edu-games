@@ -7,6 +7,8 @@
     height: 170px;
 }
 
+
+
 .game-card:hover .g-l-hover {
     background-color: rgb(226, 226, 226);
     text-decoration:none;

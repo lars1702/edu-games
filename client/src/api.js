@@ -84,6 +84,34 @@ export default {
         return res.data})
       .catch(errHandler);
   },
+
+  getMyFavs() {
+    return service
+      .get('/favs')
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  getFav(favId) {
+    return service
+      .get('/favs/' + favId)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  addFav(title) {
+    return service
+      .post('/favs', { title })
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  addGameToFav(favId, gameId) {
+    return service
+      .post('/favs/' + favId + "/games", { gameId })
+      .then(res => res.data)
+      .catch(errHandler);
+  },
   
   
   signup(userInfo) {

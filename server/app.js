@@ -13,6 +13,7 @@ var User = require('./models/user');
 
 var authRoutes = require('./routes/auth');
 var gamesRoutes = require('./routes/games');
+var favsRoutes = require('./routes/favs');
 var userRoutes = require('./routes/user');
 
 require('./configs/database');
@@ -63,6 +64,7 @@ passport.use(strategy);
 // List all your API routes
 app.use('/api', authRoutes);
 app.use('/api/games', gamesRoutes);
+app.use('/api/favs', favsRoutes);
 app.use('/api/user', userRoutes);
 
 

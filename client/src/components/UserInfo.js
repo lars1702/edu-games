@@ -7,7 +7,8 @@ class UserInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null,
+      favs: []
     };
   }
 
@@ -19,6 +20,11 @@ class UserInfo extends Component {
         user: user
       });
     });
+    api.getMyFavs().then(favs => {
+      this.setState({
+        favs
+      })
+    })
   }
   render() {
     console.log("renderrrr");
@@ -30,11 +36,23 @@ class UserInfo extends Component {
           <div>
             <h2>{this.state.user.email}</h2>
             <p>{this.state.user.name}</p>
-            {this.state.user._favs.map(favObj => (
+            {/* {this.state.user._favs.map(favObj => (
               <div className="card m-2">
                 <p>{favObj.title}</p>
                 <ul>
                   {favObj.games.map((game, i) => (
+                    <Link to={`/games/${game._id}`}>
+                      <li className="">{game.name}</li>
+                    </Link>
+                  ))}
+                </ul>
+              </div>
+            ))} */}
+            {this.state.favs.map(fav => (
+              <div className="card m-2">
+                <p>{fav.title}</p>
+                <ul>
+                  {fav._games.map((game, i) => (
                     <Link to={`/games/${game._id}`}>
                       <li className="">{game.name}</li>
                     </Link>

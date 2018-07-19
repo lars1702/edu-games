@@ -74,8 +74,6 @@ class AddGame extends Component {
   
   handleClick(e) {
     e.preventDefault()
-    // console.log(this.state.name, this.state.description)
-    //we don't want the pic to be part of the data i think
     let data = {
       name: this.state.name,
       keywords: this.state.keywords,

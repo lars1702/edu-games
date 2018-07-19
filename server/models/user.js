@@ -9,10 +9,10 @@ const userSchema = new Schema({
   name: {type:String, required: [true, "A name is required"]},
   imgUrl: String,
   
-  _favs: [{
-            title: String,
-            games: [{type: Schema.Types.ObjectId, ref: "Game"}]
-          }],
+  // _favs: [{
+  //           title: String,
+  //           games: [{type: Schema.Types.ObjectId, ref: "Game"}]
+  //         }],
   _games: [{type: Schema.Types.ObjectId, ref: "Game"}],
 });
 

@@ -14,7 +14,8 @@ class Gamelist extends Component {
     super(props);
     this.state = {
       games: [],
-      searchTerm: ""
+      searchTerm: "",
+      favs: []
     };
   }
   componentDidMount() {
@@ -26,6 +27,12 @@ class Gamelist extends Component {
         this.setState({ games });
       })
       .catch(err => console.log(err));
+    
+    api.getMyFavs().then(favs => {
+        this.setState({
+          favs
+        })
+      })
   }
 
   handleSearch(e) {
@@ -107,7 +114,7 @@ class Gamelist extends Component {
                   <hr className="mb-2"/>
                   </Link>
                   <div className="w-50 mx-auto">
-                          <SaveGame className=""/>
+                    <SaveGame gameId={game._id} className="" favs={this.state.favs}/>
                   </div>
                 </div>
               </div>

@@ -13,16 +13,17 @@ class SaveGame extends React.Component {
       selectedOption: "",
       user: null
     };
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
     console.log("COMP UserInfo");
-    api.getProfile().then(user => {
-      // console.log("helllloooooooooo", user);
-      this.setState({
-        user: user
-      });
-    });
+    // api.getProfile().then(user => {
+    //   // console.log("helllloooooooooo", user);
+    //   this.setState({
+    //     user: user
+    //   });
+    // });
   }
 
   handleChange = (selectedOption) => {
@@ -34,38 +35,35 @@ class SaveGame extends React.Component {
   };
 
   addNewFav() {
-    let data = {
-      user: this.state.user,
-      newFavGame: this.state.selectedOption,
-    }
-  api.postNewFavorite(data)
-  .then(newFav => {
-    console.log('SUCCESS! GAME SAVED')
-    this.setState({
-      selectedOption: "",
-      message: `Game saved`,
-    })
-    setTimeout(() => {
+    console.log("selectedOption", this.state.selectedOption)
+    api.addGameToFav(this.state.selectedOption.value, this.props.gameId)
+    .then(newFav => {
+      console.log('SUCCESS! GAME SAVED')
       this.setState({
-        message: null
+        selectedOption: "",
+        message: `Game saved`,
       })
-    }, 2000)
-  })
-  .catch(err => {
-    console.log('ERROR')
-  })
+      setTimeout(() => {
+        this.setState({
+          message: null
+        })
+      }, 2000)
+    })
+    .catch(err => {
+      console.log('ERROR')
+    })
 }
 
 
 
   render() {
-    let favArray = this.state.user && this.state.user._favs;
+    // let favArray = this.state.user && this.state.user._favs;
+    let favArray = this.props.favs;
+
     let dropDownFavs = [];
     let temp = [];
-    // console.log("savegame useeeer", this.state.user);
-    this.state.user &&
       favArray.forEach(curFav => {
-        let curFavObj = { value: curFav.title, label: curFav.title };
+        let curFavObj = { value: curFav._id, label: curFav.title };
         dropDownFavs.push(curFavObj);
         console.log("CURR", dropDownFavs.length);
       });
@@ -74,7 +72,6 @@ class SaveGame extends React.Component {
       dropDownFavs.length >= 1 && (
         <Form className="game-lbl rounded">
           <FormGroup>
-            {/* <p className="m-0 p-0">Save game to a game-list</p> */}
             <Select
               placeholder="Add to list..."
               className=""
