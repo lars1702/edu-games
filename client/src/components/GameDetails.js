@@ -72,7 +72,7 @@ class Gamedetails extends Component {
             </div>
             <div className="col-md-6">
               <div className="col">
-                <div className="w-75 mx-auto">
+                <div className="g-d-card w-75 mx-auto">
                 <h5>
                   Add game
                 </h5>

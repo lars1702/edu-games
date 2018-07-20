@@ -44,7 +44,7 @@ class Gamelist extends Component {
     console.log("byeeee");
     return (
       <div className="Gamelist container">
-        <h2>Games</h2>
+        <h2 className=" mb-2 mt-5 font-weight-bold">Games</h2>
         <Searchbar
           className="rounded"
           onSearch={this.handleSearch.bind(this)}
@@ -73,7 +73,7 @@ class Gamelist extends Component {
             })
             .map((game, i) => (
               <div className="col-xl-4 game-card col-lg-6 m-0 p-sm-0 p-md-1">
-                <div className="g-l-card col-md my-3 pb-2 border" key={i}>
+                <div className="rounded g-l-card col-md my-3 pb-2 border" key={i}>
               <Link className=" mx-0" to={"/games/" + game._id}>
                 <h3 className="font-weight-bold my-1">{game.name}</h3>
                   <div className="g-l-card card border-0 rounded-0 game-card">

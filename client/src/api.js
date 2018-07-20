@@ -57,15 +57,14 @@ export default {
   //the ROUTE just above. You have to add the .post('/users/first-user/pictures', formData,
   // the formData. How to post both the forData and your data????????
   postGames(data) {
-    // console.log("POSTGAMES", data)
+    console.log("POSTGAMES", data)
     const formData = new FormData();
     formData.append("picture", data.file)
     formData.append("name", data.name)
     formData.append("description", data.description)
     formData.append("keywords", data.keywords)
 
-
-    // console.log('DEBUG formData', formData);
+    console.log('DEBUG formData', formData);
     return service
       .post('/user/add-game', formData, {
         headers: {

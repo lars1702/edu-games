@@ -27,10 +27,9 @@ class App extends Component {
   render() {                
     return (
       <div className="App my-bg vh-100">
-        <header className="App-header p-0">
-          <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link> 
+        <header className="App-header my-bg p-0">
+          <Link to="/"><img src={logo} className="app-logo" alt="logo" /></Link> 
           <Link to="/games">Games</Link> 
-          {/* <Link to="/profile">Profile</Link>  */}
           {api.isLoggedIn() && <Link to="/upload">Upload Game</Link> }
           {api.isLoggedIn() && <Link to="/new-playlist">New playlist</Link> }
           {!api.isLoggedIn() && <Link to="/signup">Signup</Link> }

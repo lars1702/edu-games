@@ -82,7 +82,7 @@ class AddGame extends Component {
     }
     api.postGames(data)
     .then(addedGame => {
-      console.log('SUCCESS!')
+      console.log('SUCCESS!', addedGame)
       this.setState({
         name: "",
         keywords: [],
@@ -116,12 +116,16 @@ class AddGame extends Component {
     const { selectedOption } = this.state;    //makes a variable of the current option/state
     return (
       <div className="AddGame container col-sm-9 col-lg-6 col-xl-4">
-        <h2>Add game</h2>
+        <h2 className=" mb-2 mt-5">Add game</h2>
         <p className="py-3 card bg-warning">Here you can add a new game to the website! To host a new game we will need some information about the game. Fill in the form below, and we'll do the rest.</p>
         <Form className=" border rounded p-3">
         <FormGroup>
           <Label className="mx-1 row" for="gameName">Name</Label>
           <Input onChange={(e)=>this.handleNameChange(e)} type="text" name="gameName" id="gameName" placeholder="Name of the game" />
+        </FormGroup>
+        <FormGroup>
+          <Label className="mx-1 row" for="gameUrl">URL</Label>
+          <Input type="text" name="gameUrl" id="gameUrl" placeholder="URL to the game" />
         </FormGroup>
         <FormGroup>
           <Label className="mx-1 row" for="keywordSelectMulti">Keywords</Label>

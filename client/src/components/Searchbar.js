@@ -8,7 +8,7 @@ class Searchbar extends Component {
         return(
             <form action="" method="post">
                 <input 
-                placeholder="Search for edu-games..."
+                placeholder="Search for games by title or disability-keywords"
                 value={this.props.searchTerm}
                 onChange={this.props.onSearch} 
                 className="w-100 p-1 m-1" 
