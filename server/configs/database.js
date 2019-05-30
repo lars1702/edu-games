@@ -3,12 +3,11 @@
 require("dotenv").config();
 
 const mongoose = require('mongoose');
-// const dbName = 'edu-fun';
-// || `mongodb://localhost/${dbName}`;
-const mongoUri = process.env.MONGODB_URI
+const dbName = 'edu-fun';
+const mongoUri = process.env.MONGODB_URI || `mongodb://localhost/${dbName}`
 
 // connect to the database
-mongoose.connect(mongoUri);
+mongoose.connect(mongoUri, { useNewUrlParser: true , useCreateIndex: true, useFindAndModify: false});
 
 const db = mongoose.connection;
 
