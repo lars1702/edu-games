@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.my-bg {
-  background-color: #C9F5FF;
-}
-
 .grey-bg {
   background-color: #DCDCDC
 }
@@ -20,26 +16,11 @@
   background-color: #29C400
 }
 
-
-.vh-100 {
-  min-height: 100vh
-}
-
 .app-logo {
   border-radius: 15px;
   padding: 6px;
   /* animation: App-logo-spin infinite 10s cubic-bezier(0.5, 0.3, 0.2, 0.5); */
   height: 60px;
-}
-
-.App-header {
-  background-color: rgb(38, 175, 0);
-  color: white;
-}
-
-.App-header a {
-  color: white;
-  padding: 0 20px;
 }
 
 .App-title {

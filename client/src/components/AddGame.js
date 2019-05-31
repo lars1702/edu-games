@@ -22,56 +22,46 @@ class AddGame extends Component {
   }
 
   componentDidMount() {
-    console.log("compone/*  */ntdidmount");
     api
       .getGames()
       .then(games => {
-        console.log("GAMES:", games);
         this.setState({ games });
       })
-      .catch(err => console.log(err));
   }
   handleImgChange(e) {
-    console.log('handleImgChange');
-    console.log('DEBUG e.target.files[0]', e.target.files[0]);
     this.setState({
       file: e.target.files[0]
     })
-    console.log(this.state.file)
   }
 
   handleNameChange(e) {
-    console.log('handleNameChange', e.target.value);
     this.setState({
       name: e.target.value
     })
-    console.log(this.state.name)
   }
 
   handleDescriptionChange(e) {
-    console.log('descriptionchange', e.target.value);
     this.setState({
       description: e.target.value
     })
-    console.log(this.state.description)
   }
-  
+
   handleSelectChange = (selectedOption) => {
     if (selectedOption.length === 0) {
-      this.setState({ 
+      this.setState({
         selectedOption,
-        keywords: [] 
+        keywords: []
       });
     }
     else {
-      this.setState({ 
+      this.setState({
         selectedOption,
-        keywords: [...this.state.keywords, selectedOption[selectedOption.length-1].value] 
+        keywords: [...this.state.keywords, selectedOption[selectedOption.length-1].value]
       });
-    }    
+    }
   }
-  
-  
+
+
   handleClick(e) {
     e.preventDefault()
     let data = {
@@ -82,7 +72,6 @@ class AddGame extends Component {
     }
     api.postGames(data)
     .then(addedGame => {
-      console.log('SUCCESS!', addedGame)
       this.setState({
         name: "",
         keywords: [],
@@ -97,7 +86,6 @@ class AddGame extends Component {
       }, 2000)
     })
     .catch(err => {
-      console.log('ERROR')
     })
   }
 

@@ -1,50 +1,61 @@
 .list-image {
-    text-align: left;
-    margin-right: 100%
+  text-align: left;
+  margin-right: 100%
 }
 
 .text-n-img {
-    height: 170px;
+  height: 170px;
 }
 
+body {
+  position: relative;
+}
 
+.my-bg {
+  background: repeating-linear-gradient(45deg,#606dbc,#606dbc 50px,#465298 50px,#465298 100px);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
 
 .game-card:hover .g-l-card {
-    background-color: rgb(226, 226, 226) !important;
-    text-decoration:none;
+  background-color: rgb(226, 226, 226) !important;
+  text-decoration:none;
 }
 
 .g-l-card {
-    background-color: #FFD940
+  background-color: #FFD940
 }
 
 .kw-list {
-    height: 79.2px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  height: 79.2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
 }
 .btn-hover:hover {
-    background-color: rgb(155, 155, 155)
+  background-color: rgb(155, 155, 155)
 }
 
 .ell {
-    margin: 1px !important;
+  margin: 1px !important;
 }
 
 a:link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:visited {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:active {
-    text-decoration: none;
+  text-decoration: none;
 }

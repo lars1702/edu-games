@@ -10,6 +10,26 @@ import GameDetails from './GameDetails'
 import api from '../api';
 import logo from '../ef-logo.png';
 import NewList from './NewList';
+import styled from "styled-components"
+
+const Header = styled.div`
+  box-shadow: 0px 2px 3px -1px rgba(21, 87, 36, 0.4);
+  background-color: #409e2c;
+  color: white;
+  a {
+    color: white;
+    padding: 0 20px;
+  }
+`
+
+export const BG = styled.div`
+  background: repeating-linear-gradient(45deg,#606dbc,#606dbc 50px,#465298 50px,#465298 100px);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+`
 
 class App extends Component {
   constructor(props) {
@@ -17,25 +37,29 @@ class App extends Component {
     this.state = {
       games: []
     }
-    api.loadUser();
+  }
+
+  componentDidMount() {
+    api.loadUser()
   }
 
   handleLogoutClick(e) {
     api.logout()
   }
 
-  render() {                
+  render() {
     return (
-      <div className="App my-bg vh-100">
-        <header className="App-header my-bg p-0">
-          <Link to="/"><img src={logo} className="app-logo" alt="logo" /></Link> 
-          <Link to="/games">Games</Link> 
+      <div style={{position: "relative"}} className="App">
+        <BG/>
+        <Header>
+          <Link to="/"><img src={logo} className="app-logo" alt="logo" /></Link>
+          <Link to="/games">Games</Link>
           {api.isLoggedIn() && <Link to="/upload">Upload Game</Link> }
           {api.isLoggedIn() && <Link to="/new-playlist">New playlist</Link> }
           {!api.isLoggedIn() && <Link to="/signup">Signup</Link> }
           {!api.isLoggedIn() && <Link to="/login">Login</Link> }
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link> }
-        </header>
+        </Header>
         <Switch>
           <Route exact path="/" component={Gamelist} />
           <Route exact path="/games" component={Gamelist} />
@@ -46,9 +70,9 @@ class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route render={() => <h2>404</h2>} />
-        </Switch>        
+        </Switch>
       </div>
-    );
+    )
   }
 }
 

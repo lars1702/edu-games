@@ -1,24 +1,50 @@
 import React, { Component } from "react";
+import styled, { css } from "styled-components"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-//super is Gamelist
+const Search = () => <FontAwesomeIcon size="lg" style={{marginRight: "10px"}} icon={faSearch}/>
 
+const Input = styled.input`
+  box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.3);
+  border: none;
+  width: 100%;
+  padding: 8px 15px 8px 42px;
+`
+const Placeholder = styled.div`
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: darkgrey;
+  pointer-events: none;
+`
+const Form = styled.form`
+  position: relative;
+  margin: 4px;
+  width: 80%;
+  margin: 0 auto;
+`
 
 class Searchbar extends Component {
-    render() {
-        return(
-            <form action="" method="post">
-                <input 
-                placeholder="Search for games by title or disability-keywords"
-                value={this.props.searchTerm}
-                onChange={this.props.onSearch} 
-                className="w-100 p-1 m-1" 
-                type="text" 
-                name="searchbar" 
-                id="searchbar"/>
-            </form>
-        )
-    }
-
+  render() {
+    return(
+      <Form action="" method="post">
+        <Input
+          value={this.props.searchTerm}
+          onChange={this.props.onSearch}
+          type="text"
+          name="searchbar"
+          id="searchbar"
+        />
+        <Placeholder>
+          <Search/>
+          {!this.props.searchTerm &&<span>Search for games by title or disability-keywords</span>}
+        </Placeholder>
+      </Form>
+    )
+  }
 }
 
 
