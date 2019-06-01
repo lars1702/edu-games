@@ -53,20 +53,11 @@ class Gamelist extends Component {
         <div className="row">
           {this.state.games
             .filter(game => {
-              //filter out only the searched-for items
-              if (
-                game.name
-                  .toUpperCase()
-                  .includes(this.state.searchTerm.toUpperCase())
-              )
+              if (game.name.toUpperCase().includes(this.state.searchTerm.toUpperCase()))
                 return true;
               for (let i = 0; i < game.keywords.length; i++) {
                 const keyword = game.keywords[i];
-                if (
-                  keyword
-                    .toUpperCase()
-                    .includes(this.state.searchTerm.toUpperCase())
-                )
+                if (keyword.toUpperCase().includes(this.state.searchTerm.toUpperCase()))
                   return true;
               }
               return false;
@@ -94,7 +85,6 @@ class Gamelist extends Component {
                           >
                             {game.description}
                           </Shiitake>
-                          {/* Shiitake truncates text so it doesn't overflow. It's to get equally sized cards despite different length of descriptions! */}
                         </div>
                       </div>
                       
@@ -114,7 +104,7 @@ class Gamelist extends Component {
                   <hr className="mb-2"/>
                   </Link>
                   <div className="w-50 mx-auto">
-                    <SaveGame gameId={game._id} className="" favs={this.state.favs}/>
+                    <SaveGame gameId={game._id} favs={this.state.favs}/>
                   </div>
                 </div>
               </div>

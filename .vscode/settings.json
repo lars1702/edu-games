@@ -1,0 +1,8 @@
+{
+  "terminal.integrated.shell.windows": "cmd.exe",
+  "terminal.integrated.shellArgs.windows": [
+    "/k",
+    "C:\\Users\\self-\\AppData\\Roaming\\cmder\\vendor\\init.bat",
+    "/noautorun"
+  ],
+}
