@@ -11,6 +11,7 @@ const Input = styled.input`
   width: 100%;
   padding: 8px 15px 8px 42px;
 `
+
 const Placeholder = styled.div`
   position: absolute;
   left: 15px;
@@ -20,11 +21,11 @@ const Placeholder = styled.div`
   color: darkgrey;
   pointer-events: none;
 `
+
 const Form = styled.form`
   position: relative;
-  margin: 4px;
   width: 80%;
-  margin: 0 auto;
+  margin: 4 auto;
 `
 
 class Searchbar extends Component {
@@ -40,7 +41,7 @@ class Searchbar extends Component {
         />
         <Placeholder>
           <Search/>
-          {!this.props.searchTerm &&<span>Search for games by title or disability-keywords</span>}
+          {!this.props.searchTerm && <span>Search for games by title or keywords</span>}
         </Placeholder>
       </Form>
     )

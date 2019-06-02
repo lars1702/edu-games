@@ -1,12 +1,12 @@
-var express = require('express');
+var express = require('express')
 const Game = require('../models/game')
-const passport = require('passport');
-const config = require('../configs/index');
-const jwt = require('jwt-simple');
+const passport = require('passport')
+const config = require('../configs/index')
+const jwt = require('jwt-simple')
 
 
 
-var router = express.Router();
+var router = express.Router()
 
 // Route to get all games
 router.get('/', (req, res, next) => {
@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
       res.json(games); //sends it
     })
     .catch(err => next(err))
-});
+})
 
 // Route to add a game
 router.post('/add-game', (req, res, next) => {
@@ -26,10 +26,10 @@ router.post('/add-game', (req, res, next) => {
       res.json({
         success: true,
         game
-      });
+      })
     })
     .catch(err => next(err))
-});
+})
 
 /////////////////////////////////
 // Route to look at gamedetail //
@@ -40,7 +40,7 @@ router.get('/:gameId', (req, res, next) => {
       res.json(game); //send it
     })
     .catch(err => next(err))
-});
+})
 
 ////////////////////////
 // Route to edit game //
@@ -48,31 +48,29 @@ router.get('/:gameId', (req, res, next) => {
 router.put('/:gameId', passport.authenticate("jwt", config.jwtSession), (req, res, next) => {
   let {name, keywords, description} = req.body
   Game.findByIdAndUpdate(
-    req.params.gameId, 
+    req.params.gameId,
     {name, keywords, description} //save user id in your document. But not taking from req.body ----- _owner: req.user._id
   )
   .then(game => {
     res.json({
       success: true,
       game
-    });
+    })
   })
   .catch(err => next(err))
-});
+})
 
 //////////////////////////
 // Route to delete game //
 //////////////////////////
-//Considering i will do this from the profile page, how will i do it here? Dont really get that part. These routes are as if they're in the gamelist page
-//since you send your use object to the profile, and the user model includes
 router.delete('/:gameId', passport.authenticate("jwt", config.jwtSession), (req, res, next) => {
   Game.findByIdAndRemove(req.params.gameId)
   .then( () => {
-    res.json({success: true});
+    res.json({success: true})
   })
   .catch(err => next(err))
-});
+})
 
 
 
-module.exports = router;
+module.exports = router

@@ -5,7 +5,6 @@ const Game = require('../models/game');
 const passport = require('passport');
 const config = require('../configs/index');
 const uploadCloud = require('../configs/cloudinary');
-//find user and .push stuff from favs there
 
 // Route to get profile
 
@@ -14,12 +13,9 @@ router.get("/profile", passport.authenticate("jwt", config.jwtSession), (req, re
   User.findById(req.user.id)
   .populate('_games')
   .populate({
-        path: '_favs.games',
-        model: 'Game'
-      }
-    
-  )
-
+    path: '_favs.games',
+    model: 'Game'
+  })
   .then(currentUser => {
     console.log("LEAVING PROFILE ROUTE", currentUser)
     res.json(currentUser)
@@ -57,15 +53,8 @@ router.post('/add-to-fav',  passport.authenticate("jwt", config.jwtSession),(req
   .then((user)=>{
     console.log(user._favs)
   })
-
-  // {
-  //   title: String,
-  //   games: [{type: Schema.Types.ObjectId, ref: "Game"}]
-  // }
-  
+ 
 })
 
-
-// router.post("/add-game", uploadCloud.single("picture"))
 
 module.exports = router;

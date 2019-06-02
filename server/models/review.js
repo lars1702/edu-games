@@ -12,9 +12,7 @@ const reviewSchema = new mongoose.Schema({
       createdAt: 'created_at',
       updatedAt: 'updated_at'
     }  
-}
-
-);
+});
 
 
 const Review = mongoose.model('Review', reviewSchema);

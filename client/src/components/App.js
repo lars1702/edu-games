@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
-import Home from './Home';
+import Home from './Home/Home';
 import Gamelist from './Gamelist';
-import Profile from './Profile';
 import AddGame from './AddGame';
 import Login from './Login';
 import Signup from './Signup';
@@ -43,7 +42,7 @@ class App extends Component {
     api.loadUser()
   }
 
-  handleLogoutClick(e) {
+  handleLogoutClick() {
     api.logout()
   }
 
@@ -61,7 +60,7 @@ class App extends Component {
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link> }
         </Header>
         <Switch>
-          <Route exact path="/" component={Gamelist} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/games" component={Gamelist} />
           <Route exact path="/upload" component={AddGame} />
           <Route exact path="/new-playlist" component={NewList} />

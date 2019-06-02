@@ -13,20 +13,15 @@ export default {
   service: service,
   
   getGames() { //games
-    // console.log("ENTERING GETGAMES")
     return service
       .get('/games')
-      .then(res => {
-        // console.log("GETGAMES AFTER ROUTE.")    
-        return res.data})
+      .then(res => res.data)
       .catch(errHandler);
   },
   getProfile() {
-    // console.log("ENTERING GETPROFILE")    
     return service
       .get('/user/profile')
       .then(res => {
-        // console.log("LEAVING GETPROFILE", res.data)    
         return res.data})
       .catch(errHandler); 
   },
@@ -57,14 +52,12 @@ export default {
   //the ROUTE just above. You have to add the .post('/users/first-user/pictures', formData,
   // the formData. How to post both the forData and your data????????
   postGames(data) {
-    console.log("POSTGAMES", data)
     const formData = new FormData();
     formData.append("picture", data.file)
     formData.append("name", data.name)
     formData.append("description", data.description)
     formData.append("keywords", data.keywords)
 
-    console.log('DEBUG formData', formData);
     return service
       .post('/user/add-game', formData, {
         headers: {
@@ -75,11 +68,15 @@ export default {
       .catch(errHandler);
   },
 
+  getDictionary() {
+    return service.get('/resources/dictionary')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
   postNewFavorite(NewFavData) {
     return service
       .post('/user/add-to-fav', NewFavData)
       .then(res => {
-        // console.log("LEAVING postFavortire", res.data)    
         return res.data})
       .catch(errHandler);
   },
