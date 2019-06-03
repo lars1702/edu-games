@@ -14,7 +14,7 @@ const authRoutes = require('./routes/auth')
 const gamesRoutes = require('./routes/games')
 const favsRoutes = require('./routes/favs')
 const userRoutes = require('./routes/user')
-const resourceRouter = require('./routes/resources')
+const resourceRoutes = require('./routes/resources')
 
 require('./configs/database')
 require('./configs/cloudinary')
@@ -50,7 +50,7 @@ app.use('/api', authRoutes)
 app.use('/api/games', gamesRoutes)
 app.use('/api/favs', favsRoutes)
 app.use('/api/user', userRoutes)
-app.use('/api/resources', resourceRouter)
+app.use('/api/resources', resourceRoutes)
 
 // For any routes that starts with "/api", catch 404 and forward to error handler
 app.use('/api/*', (req, res, next) => {
@@ -65,7 +65,7 @@ app.get('*', (req, res) => {
 })
 
 // Error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   err.status = err.status || 500
   console.error("----- An error happened -----",err)
   if (process.env.NODE_ENV === 'production')

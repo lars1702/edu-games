@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 const Game = require('../models/game')
 const User = require('../models/user')
 const Review = require('../models/review')
+const Dictionary = require('../models/dictionary')
 require('dotenv').config()
 
 const dbName = 'edu-fun';
@@ -25,7 +26,7 @@ const games = [
   },
   {
     name: "Mouse-maze",
-    keywords: ["fine motor coordination", "visuo spatial ability", "sense of space", ""],
+    keywords: ["fine motor coordination", "visuo spatial ability", "sense of space"],
     description: "Recieving 3rd place in the prestigious vote for three best games in the May 2018 Ironhack web-dev-bootcamp, this games needs no introduction. But let's introduce it anyway. The goal of mouse-maze is to guide your cursor 'Pointy' through the maze without touching the cursed walls - or any of the monsters that lurk in the maze. Will you make it through?",
     imgURL: "https://image.ibb.co/nFhfTd/mouse_maze_card.png",
     gameURL: "https://lars1702.github.io/Mouse-Maze-Game/"
@@ -60,6 +61,17 @@ const games = [
   },
 ]
 
+const dictionary = [
+  {
+    term: "Autism",
+    entry: "Autism is a developmental disorder characterized by difficulties with social interaction and communication, and by restricted and repetitive behavior. Parents usually notice signs during the first three years of their child's life. These signs often develop gradually, though some children with autism reach their developmental milestones at a normal pace before worsening.",
+    references: [
+      "https://en.wikipedia.org/wiki/Autism",
+      "Autism Spectrum Disorder, 299.00 (F84.0). In: American Psychiatric Association. Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition. American Psychiatric Publishing; 2013.",
+    ]
+  }
+]
+
 const reviews = [
   {
     title: "This game was great",
@@ -74,7 +86,7 @@ const user = new User(
   {
     email: "lars@gmail.com",
     name: "Lars",
-    imgURL: "",
+    imgURL: "https://avatars2.githubusercontent.com/u/38748483?s=460&v=4",
     favs: ["5b476beeb98e0a72337f2c20", "5b476beeb98e0a72337f2c20"]
   })
 
@@ -83,10 +95,9 @@ Game.deleteMany()
 .then(() => User.deleteMany())
 .then(() => Review.deleteMany())
 .then(() => Game.create(games))
-.then(() => console.log(`\n Created a collection of ${games.length} games \n`))
 .then(() => User.register(user, "123"))
-.then(() => console.log(`Created a collection with 1 user \n`))
 .then(() => Review.create(reviews))
-.then(() => console.log(`Created a collection of ${reviews.length} reviews\n`))
+.then(() => Dictionary.create(dictionary))
+.then(() => console.warn(`\n Created a collection of ${games.length} games, 1 user, ${reviews.length} reviews, ${dictionary.length} dict entries(s) \n`))
 .then(() => mongoose.connection.close())
-.catch(err => console.log("ERROR ERROR ERROR: \n \n", err))
+.catch(err => console.error("ERROR ERROR ERROR: \n \n", err))

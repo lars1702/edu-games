@@ -20,22 +20,22 @@ body {
   top: 0;
 }
 
-.game-card:hover .g-l-card {
-  background-color: rgb(226, 226, 226) !important;
-  text-decoration:none;
-}
-
 .g-l-card {
   background-color: #FFD940
+}
+
+.game-card:hover .g-l-card {
+  background-color: rgb(210, 210, 210) !important;
+  text-decoration: none;
 }
 
 .kw-list {
   height: 79.2px;
   overflow: hidden;
   text-overflow: ellipsis;
-  overflow: hidden;
-
+  background-color: #FFD940
 }
+
 .btn-hover:hover {
   background-color: rgb(155, 155, 155)
 }

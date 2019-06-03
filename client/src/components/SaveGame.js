@@ -1,6 +1,6 @@
 import React from "react";
 // <img className="heart" height="25" src={heart} alt="save game"/>
-import Select, { Creatable } from "react-select";
+import Select from "react-select";
 import { Form, FormGroup } from "reactstrap";
 import api from "../api";
 import "./SaveGame.css";

@@ -1,47 +1,46 @@
-import React, { Component } from "react";
-import api from "../api";
-import "./Gamelist.css";
-import { Link } from "react-router-dom";
-import Searchbar from "./Searchbar";
-import Shiitake from "shiitake";
-import SaveGame from "./SaveGame"
-
+import React, { Component } from "react"
+import api from "../api"
+import "./Gamelist.css"
+import Searchbar from "./Searchbar"
+import GameCard from "./Gamelist/GameCard"
 
 
 class Gamelist extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       games: [],
       searchTerm: "",
       favs: []
-    };
+    }
   }
   componentDidMount() {
-    console.log("componentdidmount");
-    api
-      .getGames()
-      .then(games => {
-        console.log("GAMES:", games);
-        this.setState({ games });
-      })
-      .catch(err => console.log(err));
-    
-    api.getMyFavs().then(favs => {
-        this.setState({
-          favs
-        })
-      })
+    api.getGames()
+    .then(games => 
+      this.setState({ games })
+    ).catch(err => console.error(err))
+    api.getMyFavs().then(favs => this.setState({ favs }))
   }
 
   handleSearch(e) {
     this.setState({
       searchTerm: e.target.value
-    });
+    })
+  }
+
+  gameFilter = (game) => {
+    const st = this.state.searchTerm.toUpperCase()
+    if (game.name.toUpperCase().includes(st))
+      return true
+    for (let i = 0; i < game.keywords.length; i++) {
+      const keyword = game.keywords[i]
+      if (keyword.toUpperCase().includes(st))
+        return true
+    }
+    return false
   }
 
   render() {
-    console.log("byeeee");
     return (
       <div className="Gamelist container">
         <h2 className=" mb-2 mt-5 font-weight-bold">Games</h2>
@@ -52,67 +51,14 @@ class Gamelist extends Component {
         />
         <div className="row">
           {this.state.games
-            .filter(game => {
-              if (game.name.toUpperCase().includes(this.state.searchTerm.toUpperCase()))
-                return true;
-              for (let i = 0; i < game.keywords.length; i++) {
-                const keyword = game.keywords[i];
-                if (keyword.toUpperCase().includes(this.state.searchTerm.toUpperCase()))
-                  return true;
-              }
-              return false;
-            })
-            .map((game, i) => (
-              <div className="col-xl-4 game-card col-lg-6 m-0 p-sm-0 p-md-1">
-                <div className="rounded g-l-card col-md my-3 pb-2 border" key={i}>
-              <Link className=" mx-0" to={"/games/" + game._id}>
-                <h3 className="font-weight-bold my-1">{game.name}</h3>
-                  <div className="g-l-card card border-0 rounded-0 game-card">
-                      <div className="g-l-card row mx-0 mb-2 p-0">
-                        <div className="g-l-card col-6 p-0">
-                          <img
-                            className="rounded list-image img-fluid"
-                            src={game.imgURL}
-                            alt={game.name}
-                          />
-                        </div>
-                        <div className="g-l-card col-6 px-1 py-0 my-0 text-n-img ">
-                          <Shiitake
-                            lines={6}
-                            throttleRate={200}
-                            className="my-element text-dark"
-                            tagName="p"
-                          >
-                            {game.description}
-                          </Shiitake>
-                        </div>
-                      </div>
-                      
-                    <div className="kw-list">
-                      <div className="row mx-2">
-                        {game.keywords.map((keyword, i) => (
-                          <p
-                            className="ell list-unstyled bg-secondary text-light px-1 border-0 border rounded"
-                            key={i}
-                          >
-                            {keyword}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <hr className="mb-2"/>
-                  </Link>
-                  <div className="w-50 mx-auto">
-                    <SaveGame gameId={game._id} favs={this.state.favs}/>
-                  </div>
-                </div>
-              </div>
-            ))}
+          .filter(this.gameFilter)
+          .map((game, i) => {
+            return <GameCard game={game} i={i} key={i} favs={this.state.favs}/>
+          })}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Gamelist;
+export default Gamelist

@@ -6,6 +6,8 @@ const router = express.Router()
 
 //find all dictionary entries
 router.get('/dictionary', (req, res, next) => {
-  Dictionary.find().then(d => res.json(d))
+  Dictionary.find().then(dict => res.json(dict))
   .catch(err => next(err))
 })
+
+module.exports = router
