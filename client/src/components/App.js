@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import Home from './Home/Home';
-import Gamelist from './Gamelist';
+import Gamelist from './Gamelist/Gamelist';
 import AddGame from './AddGame';
 import Login from './Login';
 import Signup from './Signup';
@@ -28,6 +28,7 @@ export const BG = styled.div`
   right: 0;
   left: 0;
   top: 0;
+  z-index: -1;
 `
 
 class App extends Component {

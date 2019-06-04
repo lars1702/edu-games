@@ -11,15 +11,6 @@ body {
   position: relative;
 }
 
-.my-bg {
-  background: repeating-linear-gradient(45deg,#606dbc,#606dbc 50px,#465298 50px,#465298 100px);
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  top: 0;
-}
-
 .g-l-card {
   background-color: #FFD940
 }

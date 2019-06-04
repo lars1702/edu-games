@@ -12,16 +12,16 @@ mongoose.connect(mongoUri, { useNewUrlParser: true , useCreateIndex: true, useFi
 const games = [
   {
     name: "Tetris",
-    keywords: ["fine motor coordination", "retention", "short-term-memory", "reaction speed", "information processing", "executive functions", "planning/visualising", "shape visualisation"],
+    keywords: ["fine motor coordination", "fine motor coordination", "fine motor coordination", "fine motor coordination", "fine motor coordination", "retention", "short-term-memory", "reaction speed", "information processing", "executive functions", "planning/visualising", "shape visualisation"],
     description: "Tetris is excellent for several important cognitive abilities. As the games pace progresses it requires more skills from the user. Reaction speed and planning, which are less important in the start becomes imperative to master at higher levels. ",
-    imgURL: "http://www.coolmath-games.com/sites/cmatgame/files/snake.png",
+    imgURL: "https://www.geek.com/wp-content/uploads/2016/05/image-625x352.jpg",
     gameURL: "https://tetris.com/play-tetris"
   },
   {
     name: "Snake",
     keywords: ["fine motor coordination", "reaction speed", "information processing"],
     description: "Snake is a classic game where the goal is to get as big as possible by eating as much food as possible. Steer the snake to the food, and crashing into the wall or yourself",
-    imgURL: "https://www.geek.com/wp-content/uploads/2016/05/image-625x352.jpg",
+    imgURL: "http://www.coolmath-games.com/sites/cmatgame/files/snake.png",
     gameURL: "http://www.coolmath-games.com/0-snake"
   },
   {

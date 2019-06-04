@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 import api from "../api"
-// import Gamelist from "./Gamelist"
 import "./GameDetails.css"
-//import heart from "../images/heart-solid.svg"
 import SaveGame from "./SaveGame"
 
 
