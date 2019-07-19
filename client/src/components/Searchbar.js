@@ -24,8 +24,8 @@ const Placeholder = styled.div`
 
 const Form = styled.form`
   position: relative;
-  width: 80%;
-  margin: 4 auto;
+  width: 90%;
+  margin: 4px auto;
 `
 
 class Searchbar extends Component {
