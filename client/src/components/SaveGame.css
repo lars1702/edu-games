@@ -1,37 +1,19 @@
-/* .Select-menu-outer {
-    background-color: #ffc107 !important;
-} */
-.g-l-card .Select-control {
+
+.Select-control {
     background-color: lightyellow !important;
     color: black;
     border: 0;
     margin-top: 18px;
 }
-/* .g-l-card .Select {
-    background-color: lightyellow !important;
-    border-radius: .25rem!important;
-    border: 0
-} */
 
-.g-l-card .Select-control:hover {
+.Select-control:hover {
     background-color: lightblue !important;
     border: 0
 }
 
-.g-l-card .game-lbl {
-    background-color: white;
-    padding-bottom: 0px;
-    padding-bottom: 0px;
-}
 
-.g-d-card .Select-control:hover {
-    background-color: lightblue !important;
-    border: 0
-}
-
-.g-d-card .game-lbl {
+.g-d-card, .game-lbl{
     background-color: white;
-    padding-bottom: 0px;
     padding-bottom: 0px;
 }
 
