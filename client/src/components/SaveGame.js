@@ -36,28 +36,29 @@ class SaveGame extends React.Component {
   }
 
 
-
+  dropDownFavs = () => {
+    return this.props.favs.map(curFav =>
+      ({
+        value: curFav._id,
+        label: curFav.title
+      }))
+  }
 
   render() {
-    let favArray = this.props.favs;
-
-    let dropDownFavs = [];
-    favArray.forEach(curFav => {
-      let curFavObj = { value: curFav._id, label: curFav.title };
-      dropDownFavs.push(curFavObj);
-      console.log("CURR", dropDownFavs.length);
-    });
+    //TODO:
+    // Remove the accursed bootstrap
+    // render message of "save saved for like 2 sec when added"
+    // then conditionally render "nothing in the list" if... well... yeah. Duh. 
     return (
-      dropDownFavs.length >= 1 && (
+      this.dropDownFavs.length && (
         <Form className="game-lbl rounded">
           <FormGroup>
             <Select
               placeholder="Add to list..."
-              className=""
               name="addGameDropDown"
               id="addGameDropDown"
               onChange={this.handleChange}
-              options={dropDownFavs}
+              options={this.dropDownFavs}
             />
           </FormGroup>
           <div className="rounded" style={{
