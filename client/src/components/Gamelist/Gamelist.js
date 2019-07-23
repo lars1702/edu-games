@@ -37,18 +37,20 @@ class Gamelist extends Component {
       favs: []
     }
   }
+
   componentDidMount() {
     api.getGames()
     .then(games =>
       this.setState({ games })
     ).catch(err => console.error(err))
-    api.getMyFavs().then(favs => this.setState({ favs }))
+    api.getMyFavs().then(favs => {
+      this.setState({ favs })
+    })
   }
 
-  handleSearch(e) {
-    this.setState({
-      searchTerm: e.target.value
-    })
+  handleSearch = (e) => {
+    const searchTerm = e.target.value
+    this.setState({ searchTerm })
   }
 
   searchFilter = (game) => {
@@ -64,18 +66,19 @@ class Gamelist extends Component {
   }
 
   render() {
+    const { searchTerm, favs, games } = this.state
     return (
       <Container>
         <Title>Games</Title>
         <Searchbar
-          onSearch={this.handleSearch.bind(this)}
-          searchTerm={this.state.searchTerm}
+          onSearch={this.handleSearch}
+          searchTerm={searchTerm}
         />
         <Games>
-          {this.state.games
+          {games
           .filter(this.searchFilter)
           .map((game, i) =>
-            <GameCard game={game} i={i} key={i} favs={this.state.favs}/>
+            <GameCard game={game} i={i} key={i} favs={favs}/>
           )}
         </Games>
       </Container>
