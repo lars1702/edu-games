@@ -18,16 +18,13 @@ class Login extends Component {
   }
 
   handleClick(e) {
-    e.preventDefault();
-    api
-      .login(this.state.email, this.state.password)
+    e.preventDefault()
+    api.login(this.state.email, this.state.password)
       .then(result => {
-        console.log("SUCCESS!");
-        this.props.history.push("/"); // Redirect to the home page
+        console.log("SUCCESS!")
+        this.props.history.push("/")
       })
-      .catch(err => {
-        console.log("ERROR");
-      });
+      .catch(err => console.error(err))
   }
 
   render() {

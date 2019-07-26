@@ -4,6 +4,8 @@ const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
 const multer = require("multer");
 
+console.error("TESTING TO SEE IF THIS IS EVEN VISIBLE");
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
@@ -14,11 +16,8 @@ var storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: "edu-fun",
   allowedFormats: ["jpg", "png"],
-  filename: function(req, file, cb) {
-    photo = new Date().getTime();
-    cb(undefined, photo);
-  }
-});
+  filename: (req, file, cb) => cb(undefined, new Date().getTime())
+})
 
 const uploadCloud = multer({ storage: storage })
 module.exports = uploadCloud;

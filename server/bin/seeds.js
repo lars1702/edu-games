@@ -84,8 +84,8 @@ const reviews = [
 
 const user = new User(
   {
-    email: "lars@gmail.com",
-    name: "Lars",
+    email: "admin@admin.com",
+    name: "admin",
     imgURL: "https://avatars2.githubusercontent.com/u/38748483?s=460&v=4",
     favs: ["5b476beeb98e0a72337f2c20", "5b476beeb98e0a72337f2c20"]
   })
@@ -95,7 +95,7 @@ Game.deleteMany()
 .then(() => User.deleteMany())
 .then(() => Review.deleteMany())
 .then(() => Game.create(games))
-.then(() => User.register(user, "123"))
+.then(() => User.register(user, "kaffekopp"))
 .then(() => Review.create(reviews))
 .then(() => Dictionary.create(dictionary))
 .then(() => console.warn(`\n Created a collection of ${games.length} games, 1 user, ${reviews.length} reviews, ${dictionary.length} dict entries(s) \n`))

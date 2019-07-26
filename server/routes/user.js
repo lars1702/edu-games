@@ -50,9 +50,7 @@ router.post('/add-to-fav',  passport.authenticate("jwt", config.jwtSession),(req
   console.log("\nUSER:", userId,"\nLIST:",ListName, "\nGAME:",gameId)
 
   User.findById(userId)
-  .then((user)=>{
-    console.log(user._favs)
-  })
+  .then((user)=>{console.log(user._favs)})
  
 })
 

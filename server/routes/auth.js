@@ -21,55 +21,26 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  const authenticate = User.authenticate();
-  const { email, password } = req.body;
-  // check if we have a email and password
+  const authenticate = User.authenticate()
+  const { email, password } = req.body
   if (email && password) {
-    // test if the credentials are valid
     authenticate(email, password, (err, user, failed) => {
-      if (err) {
-        // an unexpected error from the database
-        return next(err);
-      }
-      if (failed) {
-        // failed logging (bad password, too many attempts, etc)
-        return res.status(401).json({
-          error: failed.message,
-        });
-      }
-      if (user) {
-        // success!! Save the user id
-        // NEVER save the password here
-        // the id is usually enough because we can get back
-        // the actual user by fetching the database later
-        const payload = {
-          id: user.id,
-        };
-        // generate a token and send it
-        // this token will contain the user.id encrypted
-        // only the server is able to decrypt it
-        // for the client, this is just a token, he knows that
-        // he has to send it
-        const token = jwt.encode(payload, config.jwtSecret); //token stored in local broswer storage!
+      if (err) return next(err)
+      if (failed) return res.status(401).json({ error: failed.message })
+      if (user)
         res.json({
-          token,
-          name: user.name,
-        });
-      }
-    });
-  } else {
-    // unauthorized error
-    res.sendStatus(401);
-  }
-});
+          token: jwt.encode(user.id, config.jwtSecret),
+          name: user.name
+        })
+    })
+  } else res.sendStatus(401)
+})
 
-// Example of secret route
-// If you use Postman, don't forget to add "Authorization" "Bearer (your-JWT)"
 router.get('/secret', passport.authenticate("jwt", config.jwtSession), (req, res, next) => {
   res.json({
     answerToLifeTheUniverseAndEverything: 42,
     user: req.user
-  });
-});
+  })
+})
 
-module.exports = router;
+module.exports = router

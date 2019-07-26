@@ -56,7 +56,10 @@ class AddGame extends Component {
     else {
       this.setState({
         selectedOption,
-        keywords: [...this.state.keywords, selectedOption[selectedOption.length-1].value]
+        keywords: [
+          ...this.state.keywords,
+          selectedOption[selectedOption.length-1].value,
+        ]
       });
     }
   }
@@ -141,7 +144,7 @@ class AddGame extends Component {
           </FormText>
         </FormGroup>
         <hr/>
-        <Button success size="lg" onClick={(e) => this.handleClick(e)}>Upload game!</Button>
+        <Button size="lg" onClick={(e) => this.handleClick(e)}>Upload game!</Button>
       </Form>
 
         <div style={{

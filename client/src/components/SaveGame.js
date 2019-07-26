@@ -1,77 +1,84 @@
-import React from "react";
-// <img className="heart" height="25" src={heart} alt="save game"/>
-import Select from "react-select";
-import { Form, FormGroup } from "reactstrap";
-import api from "../api";
-import "./SaveGame.css";
+import React from "react"
+// import heart
+import CreatableSelect from 'react-select/creatable';
+import api from "../api"
+import "./SaveGame.css"
+import styled from "styled-components"
 
+const MessageBox = styled.div`
+  margin: 0;
+  background-color: lightyellow;
+  border-radius: 4px;
+`
+
+const createOption = (label: string) => ({
+  label,
+  value: label.toLowerCase().replace(/\W/g, ''),
+})
 
 
 class SaveGame extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       selectedOption: "",
       message: null,
-    };
-    this.handleChange = this.handleChange.bind(this)
+      isLoading: false,
+      value: undefined,
+      options: this.props.favs.map(fav => ({ value: fav._id, label: fav.title })),
+    }
+  }
+  
+  saveCount = 0
+  handleChange = async (selectedOption) => {
+    console.log('DEBUG - selectedOption:', selectedOption)
+    const setMsgNull = () => this.setState({ message: null })
+
+    await api.addGameToFav(selectedOption.value, this.props.gameId) // the only important part
+    this.saveCount+=1
+    this.setState({
+      message: `${this.saveCount} games saved`,
+      value: selectedOption.value, //IS THIS THE SAME????????????
+    })
+    setTimeout(setMsgNull, 2000)
   }
 
-  handleChange = (selectedOption) => {
-    api.addGameToFav(selectedOption.value, this.props.gameId)
-    .then(newFav => {
-      console.log('SUCCESS! GAME SAVED')
+  handleCreate = async (inputValue) => {
+    this.setState({ isLoading: true })
+    console.log('DEBUG - inputValue:', inputValue)
+    await api.addFav(inputValue)
+    await api.addGameToFav(inputValue, this.props.gameId)
+    setTimeout(() => {
+      const newOption = createOption(inputValue)
       this.setState({
-        message: `Game saved`,
+        isLoading: false,
+        options: [...this.state.options, newOption],
+        value: newOption,
       })
-      setTimeout(() => {
-        this.setState({
-          message: null
-        })
-      }, 2000)
-    })
-    .catch(err => {
-      console.log('ERROR')
-    })
+    }, 1000)
   }
 
-
-  dropDownFavs = () => {
-    return this.props.favs.map(curFav =>
-      ({
-        value: curFav._id,
-        label: curFav.title
-      }))
-  }
 
   render() {
-    //TODO:
-    // Remove the accursed bootstrap
-    // render message of "save saved for like 2 sec when added"
-    // then conditionally render "nothing in the list" if... well... yeah. Duh. 
+    console.log('DEBUG - RENDER SAVEGAME:', this.props)
+    const { isLoading, options, value } = this.state
     return (
-      this.dropDownFavs.length && (
-        <Form className="game-lbl rounded">
-          <FormGroup>
-            <Select
-              placeholder="Add to list..."
-              name="addGameDropDown"
-              id="addGameDropDown"
-              onChange={this.handleChange}
-              options={this.dropDownFavs}
-            />
-          </FormGroup>
-          <div className="rounded" style={{
-            margin: 0,
-            backgroundColor: "lightyellow",
-            display: this.state.message ? "block" : "none"
-          }}>
-            {this.state.message}
-          </div>
-        </Form>
-      )
-    );
+      ! this.state.message
+      ?
+        <CreatableSelect
+          isDisabled={isLoading}
+          isLoading={isLoading}
+          placeholder="Add to list..."
+          name="addGameDropDown"
+          id="addGameDropDown"
+          onChange={this.handleChange}
+          options={options}
+          value={value}
+        />
+      :
+        <MessageBox> {this.state.message} </MessageBox>
+    )
   }
 }
 
-export default SaveGame;
+export default SaveGame

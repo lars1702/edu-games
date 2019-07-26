@@ -17,16 +17,11 @@ class NewList extends Component {
   componentDidMount() {
     console.log("COMP newplay");
     api.getProfile().then(user => {
-      console.log("helllloooooooooo", user);
-      this.setState({
-        user: user
-      });
-    });
-    api.getMyFavs().then(favs => {
-      this.setState({
-        favs
-      });
-    });
+      console.log("api profile comp did mount", user);
+      this.setState({ user })
+    })
+    api.getMyFavs().then(favs =>
+      this.setState({ favs }))
   }
 
   handleClick(e) {
@@ -34,11 +29,6 @@ class NewList extends Component {
     let favTitle = this.state.favInput;
     api.addFav(favTitle).then((newFav) => {
       console.log([...this.state.favs, newFav])
-
-      // this.setState({ 
-      //   favs: [...this.state.favs, newFav]
-      // });
-
       window.location = '/new-playlist';
     })
   }
