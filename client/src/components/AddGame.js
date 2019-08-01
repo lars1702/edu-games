@@ -1,11 +1,50 @@
-import React, { Component } from 'react';
-// import { Route, Switch, NavLink, Link } from 'react-router-dom';
-import api from '../api';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+import React, { Component } from 'react'
+import Select from 'react-select'
+import { Form } from 'reactstrap'
+import api from '../api'
 import "./App.css"
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import styled from "styled-components"
 
+export const Container = styled.div`
+  max-width: 500px;
+  margin: 0 auto;
+  background: grey;
+  padding: 50px;
+  border-radius: 0px 0px 5px 5px;
+`
+
+export const Button = styled.div`
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #409e2c;
+  width: fit-content;
+  margin: 0 auto;
+  cursor: pointer;
+  border: 1px solid #86919c;
+`
+
+const Input = styled.input`
+  display: flex;
+  width: 100%;
+  color: #495057;
+  background-color: #fff;
+  padding: 5px 10px;
+  margin: 35px auto;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+`
+
+const Textarea = styled.textarea`
+  display: flex;
+  width: 100%;
+  flex-shrink: 0;
+  color: #495057;
+  background-color: #fff;
+  padding: 5px 10px;
+  margin: 35px auto;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+`
 
 class AddGame extends Component {
   constructor(props) {
@@ -15,148 +54,91 @@ class AddGame extends Component {
       description: "",
       keywords: [],
       message: null,
-      selectedOption: '',
-      games: [],
-      file: null
+      selectedOptions: '',
+      file: null,
+      allKeyWords: [],
     }
+    this.initialState = this.state
   }
 
-  componentDidMount() {
-    api
-      .getGames()
-      .then(games => {
-        this.setState({ games });
-      })
+  async componentDidMount() {
+    const games = await api.getGames()
+    const keywordSet = new Set(games.map(game => game.keywords).flat())
+    const allKeyWords = Array.from(keywordSet).map(keyword => ({ value: keyword, label: keyword }))
+    this.setState({ allKeyWords })
   }
-  handleImgChange(e) {
+
+  handleChange(value) {
+    this.setState(value)
+  }
+
+  handleSelectChange = (selectedOptions) => {
+    const keywords = selectedOptions.map(option => option.value)
     this.setState({
-      file: e.target.files[0]
+      selectedOptions,
+      keywords,
     })
   }
 
-  handleNameChange(e) {
-    this.setState({
-      name: e.target.value
-    })
-  }
 
-  handleDescriptionChange(e) {
-    this.setState({
-      description: e.target.value
-    })
-  }
-
-  handleSelectChange = (selectedOption) => {
-    if (selectedOption.length === 0) {
-      this.setState({
-        selectedOption,
-        keywords: []
-      });
-    }
-    else {
-      this.setState({
-        selectedOption,
-        keywords: [
-          ...this.state.keywords,
-          selectedOption[selectedOption.length-1].value,
-        ]
-      });
-    }
-  }
-
-
-  handleClick(e) {
+  handleClick = async (e) => {
+    const { name, selectedOptions, description, file } = this.state
     e.preventDefault()
-    let data = {
-      name: this.state.name,
-      keywords: this.state.keywords,
-      description: this.state.description,
-      file: this.state.file,
-    }
-    api.postGames(data)
-    .then(addedGame => {
-      this.setState({
-        name: "",
-        keywords: [],
-        description: "",
-        message: `Your game '${this.state.name}' has been created`,
-        file: null
-      })
-      setTimeout(() => {
-        this.setState({
-          message: null
-        })
-      }, 2000)
+    await api.postGames({
+      name,
+      keywords: selectedOptions.map(option => option.value),
+      description,
+      file,
     })
-    .catch(err => {
+    this.setState({
+      ...this.initialState,
+      message: `Your game '${name}' has been created`
     })
+    setTimeout(() => this.setState({ message: null }), 2000)
   }
 
   render() {
-    let games = this.state.games
-    let dropDownKeyWords = []
-    let temp = []
-    games.forEach ((game)=> {
-      game.keywords.forEach((kw, i) => {
-        let kwObject = { value: kw, label: kw }
-        if (!temp.includes(kw)) dropDownKeyWords.push(kwObject)
-        temp.push(kw)
-      })
-    })
-
-    const { selectedOption } = this.state;    //makes a variable of the current option/state
+    const { selectedOptions, allKeyWords } = this.state
     return (
-      <div className="AddGame container col-sm-9 col-lg-6 col-xl-4">
-        <h2 className=" mb-2 mt-5">Add game</h2>
-        <p className="py-3 card bg-warning">Here you can add a new game to the website! To host a new game we will need some information about the game. Fill in the form below, and we'll do the rest.</p>
-        <Form className=" border rounded p-3">
-        <FormGroup>
-          <Label className="mx-1 row" for="gameName">Name</Label>
-          <Input onChange={(e)=>this.handleNameChange(e)} type="text" name="gameName" id="gameName" placeholder="Name of the game" />
-        </FormGroup>
-        <FormGroup>
-          <Label className="mx-1 row" for="gameUrl">URL</Label>
-          <Input type="text" name="gameUrl" id="gameUrl" placeholder="URL to the game" />
-        </FormGroup>
-        <FormGroup>
-          <Label className="mx-1 row" for="keywordSelectMulti">Keywords</Label>
-          <Select
-            name="multi-keyword-selector"
-            id="keywordSelectMulti"
-            value={selectedOption}
-            className=""
-            onChange={this.handleSelectChange}
-            multi={true}
-            options={dropDownKeyWords}
+      <Container>
+        <h2><strong>ADD GAME</strong></h2>
+        <p>
+          As an admin, you can add new games to the website.
+          Fill in the form below, and the game will be uploaded automatically.
+        </p>
+        <Form>
+          <Input
+            onChange={(e) => this.handleChange({ name: e.target.value })}
+            type="text"
+            placeholder="Name of the game"
           />
-        </FormGroup>
-        <FormGroup>
-          <Label className="mx-1 row" for="gameDescription">Game description</Label>
-          <Input onChange={(e)=>this.handleDescriptionChange(e)} placeholder="How is the game played & how is it educational?" type="textarea" name="gameDescription" id="gameDescription" />
-        </FormGroup>
-        <hr/>
-        <FormGroup className=" w-75 rounded">
-          <Label for="cloudUpload" className="mx-1 row text-align-left mr-auto">Picture upload</Label>
-          <Input onChange={(e)=>this.handleImgChange(e)} type="file" name="cloudUpload" id="cloudUpload" /> {/* ONLY THIS LINE IS REPLACED */}
-          <FormText color="muted">
+          <Input
+            type="text"
+            placeholder="URL to the game"
+          />
+          <Select
+            value={selectedOptions}
+            onChange={this.handleSelectChange}
+            isMulti
+            options={allKeyWords}
+          />
+          <Textarea
+            onChange={(e) => this.handleChange({ description: e.target.value })}
+            placeholder="Describe the game and its educational value."
+          />
             Upload a picture with the new game. This will be the image shown on the front of the game.
             The image will be cropped to 600x400px. It's suggested you pick one of equal or bigger size to avoid pixelization.
-          </FormText>
-        </FormGroup>
-        <hr/>
-        <Button size="lg" onClick={(e) => this.handleClick(e)}>Upload game!</Button>
-      </Form>
-
-        <div style={{
-          margin: 10,
-          backgroundColor: "red",
-          display: this.state.message ? "block" : "none"
-        }}>
-          {this.state.message}
-        </div>
-      </div>
-    );
+          <Input
+            onChange={(e) => this.handleChange({ file: e.target.files[0] })}
+            type="file"
+          />
+          <Button onClick={this.handleClick}>
+            Upload game!
+          </Button>
+        </Form>
+      </Container>
+    )
   }
 }
 
-export default AddGame;
+export default AddGame

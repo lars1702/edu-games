@@ -23,7 +23,7 @@ const Header = styled.div`
 
 export const BG = styled.div`
   background: repeating-linear-gradient(45deg,#606dbc,#606dbc 50px,#465298 50px,#465298 100px);
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
@@ -49,7 +49,7 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{position: "relative"}} className="App">
+      <div className="App">
         <BG/>
         <Header>
           <Link to="/"><img src={logo} className="app-logo" alt="logo" /></Link>
