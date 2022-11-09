@@ -12,7 +12,7 @@
     "react-dom": "^16.8.6",
     "react-dotdotdot": "^1.2.3",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^5.0.1",
     "react-select": "^3.0.4",
     "reactstrap": "^6.3.0",
     "shiitake": "^2.2.4",
